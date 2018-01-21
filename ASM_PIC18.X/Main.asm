@@ -45,7 +45,7 @@ LOOP:
     MOVLW	D'250'
     CALL	Delay
 
-    GOTO	LOOP
+    BRA		LOOP
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Interrupt Handler ;;
 ISRH:
@@ -110,7 +110,7 @@ Delay:
     CLRF	msCnt
 Delay_Wait:
     CPFSGT	msCnt
-    GOTO	Delay_Wait
+    BRA		Delay_Wait
     RETURN
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SPI_Transmit
@@ -118,17 +118,13 @@ Delay_Wait:
 ;; Inputs: WREG(8 bit send)
 ;; Outputs: WREG(8 bit receive)
 SPI_Transmit:
-    BTFSC	SSPSTAT, 0	    ; Wait for buffer to be empty
-    GOTO	SPI_Transmit
     MOVWF	SSPBUF		    ; Load buffer
 SPI_Wait:
-;    BTFSS	SSPSTAT, 0	    ; Wait for buffer to fill
-    MOVLW	H'01'
-    CALL	Delay
+    BTFSS	SSPSTAT, BF	    ; Wait for buffer to fill
+    BRA		SPI_Wait
     MOVF	SSPBUF, W	    ; Get response
 
     RETURN
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PT6961_Init
 ;; Initializes a 7seg display
