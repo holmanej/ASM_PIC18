@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Main.asm
+SOURCEFILES_QUOTED_IF_SPACED=Main.asm CoreFunctions.asm ISR.asm PT6961.asm SPI.asm
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o ${OBJECTDIR}/CoreFunctions.o ${OBJECTDIR}/ISR.o ${OBJECTDIR}/PT6961.o ${OBJECTDIR}/SPI.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d ${OBJECTDIR}/CoreFunctions.o.d ${OBJECTDIR}/ISR.o.d ${OBJECTDIR}/PT6961.o.d ${OBJECTDIR}/SPI.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Main.o
+OBJECTFILES=${OBJECTDIR}/Main.o ${OBJECTDIR}/CoreFunctions.o ${OBJECTDIR}/ISR.o ${OBJECTDIR}/PT6961.o ${OBJECTDIR}/SPI.o
 
 # Source Files
-SOURCEFILES=Main.asm
+SOURCEFILES=Main.asm CoreFunctions.asm ISR.asm PT6961.asm SPI.asm
 
 
 CFLAGS=
@@ -102,6 +102,38 @@ ${OBJECTDIR}/Main.o: Main.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${DEP_GEN} -d "${OBJECTDIR}/Main.o"
 	@${FIXDEPS} "${OBJECTDIR}/Main.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
+${OBJECTDIR}/CoreFunctions.o: CoreFunctions.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/CoreFunctions.o.d 
+	@${RM} ${OBJECTDIR}/CoreFunctions.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/CoreFunctions.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PK3=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/CoreFunctions.lst\" -e\"${OBJECTDIR}/CoreFunctions.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/CoreFunctions.o\" \"CoreFunctions.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/CoreFunctions.o"
+	@${FIXDEPS} "${OBJECTDIR}/CoreFunctions.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/ISR.o: ISR.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ISR.o.d 
+	@${RM} ${OBJECTDIR}/ISR.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/ISR.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PK3=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/ISR.lst\" -e\"${OBJECTDIR}/ISR.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/ISR.o\" \"ISR.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/ISR.o"
+	@${FIXDEPS} "${OBJECTDIR}/ISR.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/PT6961.o: PT6961.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/PT6961.o.d 
+	@${RM} ${OBJECTDIR}/PT6961.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/PT6961.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PK3=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/PT6961.lst\" -e\"${OBJECTDIR}/PT6961.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/PT6961.o\" \"PT6961.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/PT6961.o"
+	@${FIXDEPS} "${OBJECTDIR}/PT6961.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/SPI.o: SPI.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/SPI.o.d 
+	@${RM} ${OBJECTDIR}/SPI.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/SPI.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -d__DEBUG -d__MPLAB_DEBUGGER_PK3=1 -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/SPI.lst\" -e\"${OBJECTDIR}/SPI.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/SPI.o\" \"SPI.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/SPI.o"
+	@${FIXDEPS} "${OBJECTDIR}/SPI.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
 else
 ${OBJECTDIR}/Main.o: Main.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -111,18 +143,50 @@ ${OBJECTDIR}/Main.o: Main.asm  nbproject/Makefile-${CND_CONF}.mk
 	@${DEP_GEN} -d "${OBJECTDIR}/Main.o"
 	@${FIXDEPS} "${OBJECTDIR}/Main.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
 	
+${OBJECTDIR}/CoreFunctions.o: CoreFunctions.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/CoreFunctions.o.d 
+	@${RM} ${OBJECTDIR}/CoreFunctions.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/CoreFunctions.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/CoreFunctions.lst\" -e\"${OBJECTDIR}/CoreFunctions.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/CoreFunctions.o\" \"CoreFunctions.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/CoreFunctions.o"
+	@${FIXDEPS} "${OBJECTDIR}/CoreFunctions.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/ISR.o: ISR.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ISR.o.d 
+	@${RM} ${OBJECTDIR}/ISR.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/ISR.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/ISR.lst\" -e\"${OBJECTDIR}/ISR.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/ISR.o\" \"ISR.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/ISR.o"
+	@${FIXDEPS} "${OBJECTDIR}/ISR.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/PT6961.o: PT6961.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/PT6961.o.d 
+	@${RM} ${OBJECTDIR}/PT6961.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/PT6961.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/PT6961.lst\" -e\"${OBJECTDIR}/PT6961.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/PT6961.o\" \"PT6961.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/PT6961.o"
+	@${FIXDEPS} "${OBJECTDIR}/PT6961.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
+${OBJECTDIR}/SPI.o: SPI.asm  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/SPI.o.d 
+	@${RM} ${OBJECTDIR}/SPI.o 
+	@${FIXDEPS} dummy.d -e "${OBJECTDIR}/SPI.err" $(SILENT) -c ${MP_AS} $(MP_EXTRA_AS_PRE) -q -p$(MP_PROCESSOR_OPTION)  -l\"${OBJECTDIR}/SPI.lst\" -e\"${OBJECTDIR}/SPI.err\" $(ASM_OPTIONS)    -o\"${OBJECTDIR}/SPI.o\" \"SPI.asm\" 
+	@${DEP_GEN} -d "${OBJECTDIR}/SPI.o"
+	@${FIXDEPS} "${OBJECTDIR}/SPI.o.d" $(SILENT) -rsi ${MP_AS_DIR} -c18 
+	
 endif
 
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: link
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-dist/${CND_CONF}/${IMAGE_TYPE}/ASM_PIC18.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    
+dist/${CND_CONF}/${IMAGE_TYPE}/ASM_PIC18.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk    LinkerFile.lkr
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1 -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 -z__MPLAB_DEBUGGER_PK3=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/ASM_PIC18.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
+	${MP_LD} $(MP_EXTRA_LD_PRE) "LinkerFile.lkr"  -p$(MP_PROCESSOR_OPTION)  -w -x -u_DEBUG -z__ICD2RAM=1 -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -z__MPLAB_DEBUG=1 -z__MPLAB_DEBUGGER_PK3=1 $(MP_LINKER_DEBUG_OPTION) -odist/${CND_CONF}/${IMAGE_TYPE}/ASM_PIC18.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
 else
-dist/${CND_CONF}/${IMAGE_TYPE}/ASM_PIC18.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   
+dist/${CND_CONF}/${IMAGE_TYPE}/ASM_PIC18.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}: ${OBJECTFILES}  nbproject/Makefile-${CND_CONF}.mk   LinkerFile.lkr
 	@${MKDIR} dist/${CND_CONF}/${IMAGE_TYPE} 
-	${MP_LD} $(MP_EXTRA_LD_PRE)   -p$(MP_PROCESSOR_OPTION)  -w  -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -odist/${CND_CONF}/${IMAGE_TYPE}/ASM_PIC18.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
+	${MP_LD} $(MP_EXTRA_LD_PRE) "LinkerFile.lkr"  -p$(MP_PROCESSOR_OPTION)  -w  -m"${DISTDIR}/${PROJECTNAME}.${IMAGE_TYPE}.map"   -z__MPLAB_BUILD=1  -odist/${CND_CONF}/${IMAGE_TYPE}/ASM_PIC18.X.${IMAGE_TYPE}.${DEBUGGABLE_SUFFIX}  ${OBJECTFILES_QUOTED_IF_SPACED}     
 endif
 
 
