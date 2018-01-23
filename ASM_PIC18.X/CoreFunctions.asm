@@ -16,22 +16,22 @@ MCU_Init:
     MOVLW	H'70'
     MOVWF	OSCCON
 
-; Configure RA2 for debug LED
+; Configure RC6 for debug LED
     CLRF	ANSEL
     CLRF	ANSELH
-    CLRF	TRISA
-    BCF		PORTA, 2
+    BCF		TRISC, RC6
+    IOCLR	LED
 
 ; Configure TMR2 for 1 ms
     MOVLW	H'7D'
     MOVWF	T2CON
     MOVLW	D'250'
     MOVWF	PR2
-    BSF		PIE1, 1
+    BSF		PIE1, TMR2IE
 
 ; Global interrupt enable
-    BSF		INTCON, 6
-    BSF		INTCON, 7
+    BSF		INTCON, PEIE
+    BSF		INTCON, GIE
 
     RETURN
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

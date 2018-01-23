@@ -45,7 +45,7 @@ MAIN:
 ;; MAIN LOOP ;;
 LOOP:
     
-    BTG		PORTA, 2
+    IOTOG	LED
     MOVLW	D'250'
     CALL	Delay
 

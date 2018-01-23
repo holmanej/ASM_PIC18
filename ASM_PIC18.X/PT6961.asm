@@ -20,22 +20,23 @@ gp0	    RES 1
 ;; Inputs: none
 ;; Outputs: none
 PT6961_Init:
-    BCF		TRISB, 7	    ; CS on RB7
-    BSF		PORTB, 7
+    BCF		TRISA, RA5	    ; CS on RA5
+
+    IOSET	LCD_CS
     MOVLW	D'200'
     CALL	Delay
 
-    BCF		PORTB, 7
+    IOCLR	LCD_CS
     MOVLW	H'40'
     CALL	SPI_Transmit	    ; Set display mode
-    BSF		PORTB, 7
+    IOSET	LCD_CS
 
-    BCF		PORTB, 7
+    IOCLR	LCD_CS
     MOVLW	H'02'
     CALL	SPI_Transmit	    ; Set data
-    BSF		PORTB, 7
+    IOSET	LCD_CS
 
-    BCF		PORTB, 7
+    IOCLR	LCD_CS
     MOVLW	H'03'
     CALL	SPI_Transmit	    ; Clear RAM
     CLRF	gp0
@@ -45,14 +46,14 @@ LOOP:
     INCF	gp0
     BTFSS	gp0, 3
     BRA		LOOP
-    BSF		PORTB, 7
+    IOSET	LCD_CS
 
-    BCF		PORTB, 7
+    IOCLR	LCD_CS
     MOVLW	H'F1'
     CALL	SPI_Transmit	    ; Display on
-    BSF		PORTB, 7
+    IOSET	LCD_CS
 
-    MOVLW	H'14'
+    MOVLW	H'26'
     CALL	PT6961_SetDigit
 
     RETURN
@@ -63,12 +64,12 @@ LOOP:
 PT6961_SetDigit:
 ; Extract digit
     MOVWF	gp0
-    BCF		PORTB, 7
+    IOCLR	LCD_CS
     CALL	PT6961_luDigit
     CALL	SPI_Transmit	    ; Set digit
     CALL	PT6961_luValue
     CALL	SPI_Transmit	    ; Set value
-    BSF		PORTB, 7
+    IOSET	LCD_CS
 
     RETURN
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

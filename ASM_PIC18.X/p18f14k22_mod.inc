@@ -67,12 +67,57 @@ BANKED           EQU  1
 	#ifndef DDRE
 	#define DDRE  TRISE      ; PIC17Cxxx SFR substitution
 	#endif
+	
+;==========================================================================
+;
+;		Macros
+;
+;==========================================================================
+
+IOSET	MACRO	ioAddr
+    BSF	    ioAddr >> D'4', ioAddr & H'0F'
+	ENDM
+		
+IOCLR	MACRO	ioAddr
+    BCF	    ioAddr >> D'4', ioAddr & H'0F'
+	ENDM
+		
+IOTOG	MACRO	ioAddr
+    BTG	    ioAddr >> D'4', ioAddr & H'0F'
+	ENDM
 
 ;==========================================================================
 ;
 ;       Register Definitions
 ;
 ;==========================================================================
+
+;----- Pin Aliases --------------------------------------------------------
+#ifndef PIN_ALIAS
+#define PIN_ALIAS
+
+#define LCD_X		H'F800'		; 19
+#define LCD_Y		H'F801'		; 18
+#define LCD_Wait    	H'F802'		; 17
+#define LCD_Int		H'F803'		; 04
+#define LCD_Rst		H'F804'		; 03
+#define LCD_CS		H'F805'		; 02
+
+;define SPI_SDI		RB4		; 13
+;define UART_RX		RB5		; 12
+;define SPI_SCK		RB6		; 11
+;define UART_TX		RB7		; 10
+
+#define SRAM_DB0	H'F820'		; 16
+#define SRAM_DB1	H'F821'		; 15
+#define SRAM_DB2	H'F822'		; 14
+#define SRAM_DB3	H'F823'		; 07
+#define SRAM_CS		H'F824'		; 06
+#define FLASH_CS	H'F825'		; 05
+#define LED		H'F826'		; 08
+;define SDO			RC7		; 09
+		
+#ENDIF
 
 ;----- User Work Registers ------------------------------------------------
 
