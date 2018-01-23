@@ -8,8 +8,9 @@
     EXTERN SPI_Transmit
     EXTERN Delay
 
-    UDATA
-temp
+PT6961	    UDATA
+gp0	    RES 1
+;; end local variables ;;
 
     CODE
 
@@ -37,15 +38,13 @@ PT6961_Init:
     BCF		PORTB, 7
     MOVLW	H'03'
     CALL	SPI_Transmit	    ; Clear RAM
+    CLRF	gp0
+LOOP:
     CLRF	WREG
     CALL	SPI_Transmit
-    CALL	SPI_Transmit
-    CALL	SPI_Transmit
-    CALL	SPI_Transmit
-    CALL	SPI_Transmit
-    CALL	SPI_Transmit
-    CALL	SPI_Transmit
-    CALL	SPI_Transmit
+    INCF	gp0
+    BTFSS	gp0, 3
+    BRA		LOOP
     BSF		PORTB, 7
 
     BCF		PORTB, 7
@@ -53,7 +52,7 @@ PT6961_Init:
     CALL	SPI_Transmit	    ; Display on
     BSF		PORTB, 7
 
-    MOVLW	H'1A'
+    MOVLW	H'14'
     CALL	PT6961_SetDigit
 
     RETURN
@@ -63,15 +62,7 @@ PT6961_Init:
 ;; Outputs: none
 PT6961_SetDigit:
 ; Extract digit
-    MOVWF	temp
-    ANDLW	H'F0'
-    SWAPF	WREG
-    MOVWF	ARG0
-; Extract value
-    MOVF	temp, W
-    ANDLW	H'0F'
-    MOVWF	ARG1
-; Lookup and transmit
+    MOVWF	gp0
     BCF		PORTB, 7
     CALL	PT6961_luDigit
     CALL	SPI_Transmit	    ; Set digit
@@ -82,16 +73,17 @@ PT6961_SetDigit:
     RETURN
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PT6961_luDigit: looks up digit pos
-;; Inputs: ARG0(digit pos)
-;; Outputs: none
+;; Inputs: gp0(digit pos)
+;; Outputs: WREG(transmit byte)
 PT6961_luDigit:
     MOVLW	high(PT6961_Digits)
     MOVWF	PCLATH
-    BCF		STATUS, 0
-    RLCF	ARG0
-    MOVF	ARG0, W
+    MOVF	gp0, W
+    SWAPF	WREG
+    ANDLW	H'0F'
+    RLNCF	WREG
     ADDLW	low(PT6961_Digits)
-    BTFSC	STATUS, 3
+    BTFSC	STATUS, C
     INCF	PCLATH, F
     MOVWF	PCL
 PT6961_Digits:
@@ -101,16 +93,16 @@ PT6961_Digits:
     RETLW	H'03'		    ; right
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; PT6961_luValue: looks up 7seg value
-;; Inputs: ARG1(value)
+;; Inputs: gp0(value)
 ;; Outputs: WREG(transmit byte)
 PT6961_luValue:
     MOVLW	high(PT6961_Values)
     MOVWF	PCLATH
-    BCF		STATUS, 0
-    RLCF	ARG1
-    MOVF	ARG1, W
+    MOVF	gp0, W
+    ANDLW	H'0F'
+    RLNCF	WREG
     ADDLW	low(PT6961_Values)
-    BTFSC	STATUS, 3
+    BTFSC	STATUS, C
     INCF	PCLATH, F
     MOVWF	PCL
 PT6961_Values:
@@ -119,7 +111,7 @@ PT6961_Values:
     RETLW	H'DA'		    ; 2
     RETLW	H'F2'		    ; 3
     RETLW	H'66'		    ; 4
-    RETLW	H'B2'		    ; 5
+    RETLW	H'B6'		    ; 5
     RETLW	H'BE'		    ; 6
     RETLW	H'E0'		    ; 7
     RETLW	H'FE'		    ; 8

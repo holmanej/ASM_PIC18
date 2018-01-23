@@ -2,15 +2,17 @@
     
     GLOBAL ISRH
     GLOBAL ISRL
+
+    EXTERN SPI_Transmit
    
     CODE
     
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Interrupt Handler ;;
 ISRH:
-    BTFSC	PIR1, 1
+    BTFSC	PIR1, TMR2IF
     INCF	msCnt
-    BCF		PIR1, 1
+    BCF		PIR1, TMR2IF
 
     RETFIE
 ;;;;;;;;;;;;;;

@@ -21,15 +21,14 @@ SPI_Init:
 
     RETURN
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SPI_Transmit: Sends and receives a byte
-;; Inputs: WREG(8 bit send)
-;; Outputs: WREG(8 bit receive)
+;; SPI_Transmit: performs blocking spi transmit
+;; Inputs: WREG(byte send)
+;; Outputs: WREG(byte received)
 SPI_Transmit:
-    MOVWF	SSPBUF		    ; Load buffer
+    MOVWF	SSPBUF
 SPI_Wait:
-    BTFSS	SSPSTAT, BF	    ; Wait for buffer to fill
+    BTFSS	SSPSTAT, BF
     BRA		SPI_Wait
-    MOVF	SSPBUF, W	    ; Get response
 
     RETURN
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
